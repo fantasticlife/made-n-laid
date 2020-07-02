@@ -1,0 +1,36 @@
+<%= content_tag( 'h1', @instrument.title ) %>
+
+<table>
+	<tr>
+		<%= content_tag( 'th', 'Date made:' ) %>
+		<%= content_tag( 'td', @instrument.date_made ) %>
+	</tr>
+	<tr>
+		<%= content_tag( 'th', 'Date laid:' ) %>
+		<%= content_tag( 'td', @instrument.date_laid ) %>
+	</tr>
+	<tr>
+		<%= content_tag( 'th', 'Laying body:' ) %>
+		<%= content_tag( 'td', @instrument.laying_body ) %>
+	</tr>
+	<tr>
+		<%= content_tag( 'th', 'Procedure:' ) %>
+		<%= content_tag( 'td', @instrument.procedure ) %>
+	</tr>
+	<tr>
+		<%= content_tag( 'th', 'Instrument URI:' ) %>
+		<%= content_tag( 'td', @instrument.instrument_uri ) %>
+	</tr>
+	<tr>
+		<%= content_tag( 'th', 'Work package URI:' ) %>
+		<%= content_tag( 'td', @instrument.work_package_uri ) %>
+	</tr>
+	<tr>
+		<%= content_tag( 'th', 'End date for scrutiny:' ) %>
+		<%= content_tag( 'td', @instrument.end_date ) %>
+	</tr>
+	<tr>
+		<%= content_tag( 'th', 'Tweeted:' ) %>
+		<%= content_tag( 'td', @instrument.is_tweeted ) %>
+	</tr>
+</table>
