@@ -10,35 +10,30 @@ task :import_from_sparql => :environment do
   puts "importing raw data from sparql query"
   from_date = 2.days.ago.to_date
   to_date = Date.today
+
+  uri = URI.parse("https://api.parliament.uk/sparql")
   
-  uri = URI.parse( "https://api.parliament.uk/sparql" )
-  
-  request = Net::HTTP::Post.new( uri )
+  request = Net::HTTP::Post.new(uri)
   
   request["Accept"] = "application/sparql-results+json"
   
   request.set_form_data(
     "query" => "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX : <https://id.parliament.uk/schema/>
-      select ?Treaty ?Treatyname ?LeadOrg ?Series ?Link ?workPackage ?procStepName ?itemDate where {
-        ?Treaty a :Treaty .  
-        ?Treaty rdfs:label ?Treatyname .
-        OPTIONAL{ ?Treaty :treatyHasLeadGovernmentOrganisation/ rdfs:label ?LeadOrg .} 
-        OPTIONAL {?Treaty :treatyHasSeriesMembership/ :seriesItemCitation ?Series.}
-        OPTIONAL {?Treaty :workPackagedThingHasWorkPackagedThingWebLink ?Link.}
-        ?Treaty :workPackagedThingHasWorkPackage ?workPackage .
-        ?workPackage :workPackageHasProcedure/rdfs:label ?proc
-        FILTER(?proc IN (\"Treaties subject to the Constitutional Reform and Governance Act 2010\"))
-          ?workPackage :workPackageHasBusinessItem/:businessItemHasProcedureStep ?procStep ;
-          :workPackageHasBusinessItem ?busItem .
-          ?busItem :businessItemHasProcedureStep/rdfs:label ?itemDate2;
-          :businessItemDate ?itemDate .
-          ?procStep rdfs:label ?procStepName.
-        FILTER(?procStepName IN (\"Laid before the House of Commons\"))
-        FILTER(?itemDate2 IN (\"Laid before the House of Commons\"))
-        FILTER ( str(?itemDate) >= '#{from_date}' && str(?itemDate) <= '#{to_date}')
-      }
-    ",
+                PREFIX : <https://id.parliament.uk/schema/>
+                PREFIX id: <https://id.parliament.uk/>
+                select distinct ?SI ?SIname ?workPackage ?procedureId ?Procedure ?layingBodyName ?Madedate ?LaidDate ?Link where {
+                  ?SI a :StatutoryInstrumentPaper .  
+                ?SI rdfs:label ?SIname ;
+                :laidThingHasLaying/:layingHasLayingBody/:name ?layingBodyName;
+                :laidThingHasLaying/:layingDate ?LaidDate.
+                OPTIONAL { ?SI :workPackagedThingHasWorkPackagedThingWebLink ?Link .}
+                OPTIONAL { ?SI :statutoryInstrumentPaperMadeDate ?Madedate .}
+      	        ?SI :workPackagedThingHasWorkPackage ?workPackage .
+    	          ?workPackage :workPackageHasProcedure ?procedureId.
+                ?procedureId :name ?Procedure.
+                FILTER (?procedureId IN (id:iWugpxMn, id:5S6p4YsP))
+                FILTER ( str(?LaidDate) >= '#{from_date}' && str(?LaidDate) <= '#{to_date}')
+                }",
   )
 
   req_options = {
@@ -51,19 +46,19 @@ task :import_from_sparql => :environment do
   
   json = JSON( response.body )
   puts "found #{json['results']['bindings'].size} instruments"
-  json['results']['bindings'].each do |treaty_json|
-      puts treaty_json["Treatyname"]["value"].strip
-    instrument = Instrument.where( instrument_uri: treaty_json['Treaty']['value'] ).first
+  json['results']['bindings'].each do |instrument_json|
+    instrument = Instrument.where( instrument_uri: instrument_json["SI"]["value"].strip ).first
     unless instrument
       instrument = Instrument.new
-      instrument.title = treaty_json["Treatyname"]["value"].strip
-      instrument.lead_organisation = treaty_json["LeadOrg"]["value"].strip
-      instrument.series = treaty_json["Series"]["value"].strip
-      instrument.date_laid = treaty_json["itemDate"]["value"].strip
-      instrument.instrument_uri = treaty_json['Treaty']['value']
-      instrument.work_package_uri = treaty_json['workPackage']['value']
-      instrument.tna_uri = treaty_json['Link']['value']
-      #instrument.save
+      instrument.title = instrument_json["SIname"]["value"].strip
+      instrument.procedure = instrument_json["Procedure"]["value"].strip.split(" ").last
+      instrument.laying_body = instrument_json["layingBodyName"]["value"].strip
+      instrument.date_made = instrument_json["Madedate"]["value"].strip
+      instrument.date_laid = instrument_json["LaidDate"]["value"].strip
+      instrument.instrument_uri = instrument_json["SI"]["value"].strip
+      instrument.work_package_uri = instrument_json["workPackage"]["value"].strip
+      instrument.tna_uri = instrument_json["Link"]["value"].strip
+      instrument.save
     end
   end
 end
