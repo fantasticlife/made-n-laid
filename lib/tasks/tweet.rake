@@ -18,10 +18,10 @@ task :tweet_the_untweeted => :environment do
   instruments.each do |instrument|
     puts instrument.tweet_text
     client = TwitterOAuth::Client.new(
-        :consumer_key => consumer_key,
-        :consumer_secret => consumer_secret,
-        :token => access_token,
-        :secret => access_secret
+      :consumer_key => consumer_key,
+      :consumer_secret => consumer_secret,
+      :token => access_token,
+      :secret => access_secret
     )
     puts "Authorised: #{client.authorized?}"
   
