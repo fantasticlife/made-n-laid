@@ -58,7 +58,7 @@ task :import_from_sparql => :environment do
       instrument.instrument_uri = instrument_json["SI"]["value"].strip
       instrument.work_package_uri = instrument_json["workPackage"]["value"].strip
       instrument.tna_uri = instrument_json["Link"]["value"].strip
-      #instrument.save
+      instrument.save
     end
   end
 end
