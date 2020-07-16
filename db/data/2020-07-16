@@ -1,0 +1,150 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.3
+-- Dumped by pg_dump version 12.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: instruments; Type: TABLE; Schema: public; Owner: robert
+--
+
+CREATE TABLE public.instruments (
+    id integer NOT NULL,
+    title character varying(10000) NOT NULL,
+    procedure character varying(100) NOT NULL,
+    laying_body character varying(10000) NOT NULL,
+    date_made date NOT NULL,
+    date_laid date NOT NULL,
+    instrument_uri character varying(100) NOT NULL,
+    work_package_uri character varying(100) NOT NULL,
+    tna_uri character varying(200),
+    is_tweeted boolean DEFAULT false
+);
+
+
+ALTER TABLE public.instruments OWNER TO robert;
+
+--
+-- Name: instruments_id_seq; Type: SEQUENCE; Schema: public; Owner: robert
+--
+
+CREATE SEQUENCE public.instruments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.instruments_id_seq OWNER TO robert;
+
+--
+-- Name: instruments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: robert
+--
+
+ALTER SEQUENCE public.instruments_id_seq OWNED BY public.instruments.id;
+
+
+--
+-- Name: instruments id; Type: DEFAULT; Schema: public; Owner: robert
+--
+
+ALTER TABLE ONLY public.instruments ALTER COLUMN id SET DEFAULT nextval('public.instruments_id_seq'::regclass);
+
+
+--
+-- Data for Name: instruments; Type: TABLE DATA; Schema: public; Owner: robert
+--
+
+COPY public.instruments (id, title, procedure, laying_body, date_made, date_laid, instrument_uri, work_package_uri, tna_uri, is_tweeted) FROM stdin;
+1	Insolvency (Amendment) (EU Exit) Regulations 2020	negative	Department for Business, Energy and Industrial Strategy	2020-06-26	2020-06-30	https://id.parliament.uk/fs1SOsKL	https://id.parliament.uk/miNCzWHV	http://www.legislation.gov.uk/uksi/2020/647/made	t
+2	Merchant Shipping (Prevention of Pollution by Sewage from Ships) Regulations 2020	negative	Department for Transport	2020-06-29	2020-06-30	https://id.parliament.uk/pBq8X0zw	https://id.parliament.uk/6zyYTv7C	http://www.legislation.gov.uk/uksi/2020/620/contents/made	t
+3	Childcare Payments (Coronavirus and Miscellaneous Amendments) Regulations 2020	negative	HM Revenue and Customs	2020-06-29	2020-06-30	https://id.parliament.uk/xnJUxXB8	https://id.parliament.uk/e5wIUGQJ	http://www.legislation.gov.uk/uksi/2020/656/made	t
+4	Fees for Payment of Taxes, etc. by Card Regulations 2020	negative	HM Revenue and Customs	2020-06-29	2020-06-30	https://id.parliament.uk/tvhpyuU6	https://id.parliament.uk/fTmUw0Sa	http://www.legislation.gov.uk/uksi/2020/657/made	t
+5	Tribunal Procedure (Amendment) Rules 2020	negative	Ministry of Justice	2020-06-25	2020-06-30	https://id.parliament.uk/SBV3sAn6	https://id.parliament.uk/twhM9QHb	http://www.legislation.gov.uk/uksi/2020/651/made	t
+6	Merchant Shipping (Prevention of Pollution by Garbage from Ships) Regulations 2020	negative	Department for Transport	2020-06-22	2020-06-30	https://id.parliament.uk/F7boEXFg	https://id.parliament.uk/pCUEhLG2	http://www.legislation.gov.uk/uksi/2020/621/made	t
+7	National Health Service (Charges to Overseas Visitors) (Amendment) (No. 2) Regulations 2020	negative	Department of Health and Social Care	2020-06-29	2020-06-30	https://id.parliament.uk/z7wUiebu	https://id.parliament.uk/ZgfgIEGS	http://www.legislation.gov.uk/uksi/2020/654/made	t
+8	Electric Scooter Trials and Traffic Signs (Coronavirus) Regulations and General Directions 2020	negative	Department for Transport	2020-06-30	2020-06-30	https://id.parliament.uk/D7vR37sQ	https://id.parliament.uk/aYBpqCCn	http://www.legislation.gov.uk/uksi/2020/663/made	t
+9	Vehicle Drivers (Certificates of Professional Competence) (Amendment) Regulations 2020	negative	Department for Transport	2020-06-29	2020-06-30	https://id.parliament.uk/vkjE183t	https://id.parliament.uk/aNugWZ0y	http://www.legislation.gov.uk/uksi/2020/662/made	t
+10	Health and Safety (Consequential Amendments) (EU Exit) Regulations 2020	negative	Department for Work and Pensions	2020-06-29	2020-06-30	https://id.parliament.uk/7iYgXEUY	https://id.parliament.uk/DMkMbtZj	http://www.legislation.gov.uk/uksi/2020/660/made	t
+11	Investigatory Powers (Communications Data) (Relevant Public Authorities and Designated Senior Officers) (No. 2) Regulations 2020	negative	Home Office	2020-06-29	2020-07-01	https://id.parliament.uk/0Zn2kbyx	https://id.parliament.uk/w2QPv1Fl	http://www.legislation.gov.uk/uksi/2020/661/made	t
+12	Secure Training Centre (Coronavirus) (Amendment) Rules 2020	negative	Ministry of Justice	2020-06-25	2020-07-01	https://id.parliament.uk/YhuT2c99	https://id.parliament.uk/Bn8vAdwP	http://www.legislation.gov.uk/uksi/2020/664/made	t
+13	Loans for Mortgage Interest (Transaction Fee) (Amendment) Regulations (Northern Ireland) 2020	negative	Department for Work and Pensions	2020-07-01	2020-07-02	https://id.parliament.uk/m6yBrOkS	https://id.parliament.uk/P9ltGJoo	http://www.legislation.gov.uk/nisr/2020/125/made	t
+14	Allocation of Housing and Homelessness (Eligibility) (England) (Amendment) Regulations 2020	negative	Ministry of Housing, Communities and Local Government	2020-07-01	2020-07-02	https://id.parliament.uk/lNFNAbyq	https://id.parliament.uk/II3gPAvr	http://www.legislation.gov.uk/uksi/2020/667/made	t
+15	Loans for Mortgage Interest (Transaction Fee) (Amendment) Regulations 2020	negative	Department for Work and Pensions	2020-07-01	2020-07-02	https://id.parliament.uk/bAmTEK7g	https://id.parliament.uk/LXcUCwFu	http://www.legislation.gov.uk/uksi/2020/666/made	t
+16	Pressure Vessels (Amendment) (Northern Ireland) (EU Exit) Regulations 2020	negative	Department for Business, Energy and Industrial Strategy	2020-07-02	2020-07-02	https://id.parliament.uk/BGIt3irT	https://id.parliament.uk/DQK2DoCH	http://www.legislation.gov.uk/uksi/2020/678/made	t
+17	Healthy Start Scheme and Welfare Food (Miscellaneous Amendments) (Amendment) (England) Regulations 2020	negative	Department of Health and Social Care	2020-07-01	2020-07-02	https://id.parliament.uk/YHhfE4zy	https://id.parliament.uk/lRz3tV2z	http://www.legislation.gov.uk/uksi/2020/665/made	t
+18	Product Safety and Metrology etc. (Amendment to Extent and Meaning of Market) (EU Exit) Regulations 2020	negative	Department for Business, Energy and Industrial Strategy	2020-07-02	2020-07-02	https://id.parliament.uk/d3muOOV9	https://id.parliament.uk/qA1IANJ3	http://www.legislation.gov.uk/uksi/2020/676/contents/made	t
+19	Child Benefit and Child Tax Credit (Persons of Northern Ireland) (Amendment) Regulations 2020	negative	HM Treasury	2020-07-01	2020-07-02	https://id.parliament.uk/pMwYuqOs	https://id.parliament.uk/9TZdmNA8	http://www.legislation.gov.uk/uksi/2020/672/made	t
+20	Health Protection (Coronavirus, Restrictions) (Leicester) Regulations 2020	affirmative	Department of Health and Social Care	2020-07-03	2020-07-03	https://id.parliament.uk/Tl4IBFEB	https://id.parliament.uk/XQegk6wn	http://www.legislation.gov.uk/uksi/2020/685/contents/made	t
+21	Health Protection (Coronavirus, Restrictions) (No. 2) (England) Regulations 2020	affirmative	Department of Health and Social Care	2020-07-03	2020-07-03	https://id.parliament.uk/jYmSTx0D	https://id.parliament.uk/83jOhJW8	http://www.legislation.gov.uk/uksi/2020/684/made	t
+22	Pilotage and Port Services (Amendment) (EU Exit) Regulations 2020	negative	Department for Transport	2020-06-29	2020-07-03	https://id.parliament.uk/hMJ2lajh	https://id.parliament.uk/EYWOMGgn	http://www.legislation.gov.uk/uksi/2020/671/made	t
+23	Marketing of Seed, Plant and Propagating Material (England) Regulations 2020	negative	Department for Environment, Food and Rural Affairs	2020-07-02	2020-07-03	https://id.parliament.uk/Ohfi7hLy	https://id.parliament.uk/zVuwSbqc	http://www.legislation.gov.uk/uksi/2020/682/made	t
+24	Social Security (Income-Related Benefits) (Persons of Northern Ireland - Family Members) (Amendment) Regulations 2020	negative	Department for Work and Pensions	2020-07-02	2020-07-03	https://id.parliament.uk/8uXErwEd	https://id.parliament.uk/EjyF884V	http://www.legislation.gov.uk/uksi/2020/683/made	t
+25	Statutory Sick Pay (Coronavirus) (Suspension of Waiting Days and General Amendment) (No. 2) Regulations (Northern Ireland) 2020	negative	Department for Work and Pensions	2020-07-02	2020-07-03	https://id.parliament.uk/Z5K6MdDc	https://id.parliament.uk/VWX1M5LR	http://www.legislation.gov.uk/nisr/2020/134/made	t
+26	Statutory Sick Pay (Coronavirus) (Suspension of Waiting Days and General Amendment) (No. 2) Regulations 2020	negative	Department for Work and Pensions	2020-07-02	2020-07-03	https://id.parliament.uk/OLBsuGko	https://id.parliament.uk/ChnHZKxv	http://www.legislation.gov.uk/uksi/2020/681/made	t
+27	Universal Credit (Persons of Northern Ireland - Family Members) (Amendment) Regulations (Northern Ireland) 2020	negative	Department for Work and Pensions	2020-07-02	2020-07-03	https://id.parliament.uk/MhmffRMT	https://id.parliament.uk/68o4H4bm	http://www.legislation.gov.uk/nisr/2020/130/made	t
+28	Universal Credit (Northern Ireland Reciprocal Arrangements) Regulations 2020	negative	Department for Work and Pensions	2020-07-01	2020-07-03	https://id.parliament.uk/Dn7rWrcH	https://id.parliament.uk/5yiK1oB6	http://www.legislation.gov.uk/uksi/2020/677/made	t
+29	Civil Aviation (Insurance) (Amendment) (EU Exit) Regulations 2020	negative	Department for Transport	2020-06-29	2020-07-03	https://id.parliament.uk/nRrs2NnL	https://id.parliament.uk/rzXrkXnf	http://www.legislation.gov.uk/uksi/2020/670/made	t
+30	Health Protection (Notification) (Amendment) (No. 2) Regulations 2020	negative	Department of Health and Social Care	2020-07-01	2020-07-06	https://id.parliament.uk/XLBylh1f	https://id.parliament.uk/2Mna6nNz	http://www.legislation.gov.uk/uksi/2020/674/made	t
+31	Pension Protection Fund (Moratorium and Arrangements and Reconstructions for Companies in Financial Difficulty) Regulations 2020	affirmative	Department for Work and Pensions	2020-07-06	2020-07-06	https://id.parliament.uk/VK55D0aG	https://id.parliament.uk/lpJ8WWFy	http://www.legislation.gov.uk/uksi/2020/693/made	t
+32	Global Human Rights Sanctions Regulations 2020	affirmative	Foreign and Commonwealth Office	2020-07-05	2020-07-06	https://id.parliament.uk/jBcrBoTP	https://id.parliament.uk/rQcq207G	http://www.legislation.gov.uk/uksi/2020/680/made	t
+33	European Union (Regulated Professions Proportionality Assessment) Regulations 2020	negative	Department for Business, Energy and Industrial Strategy	2020-07-01	2020-07-06	https://id.parliament.uk/jnOKVm5D	https://id.parliament.uk/V073QnIg	http://www.legislation.gov.uk/uksi/2020/689/made	t
+34	Health Protection (Coronavirus, International Travel and Public Health Information) (England) (Amendment) Regulations 2020	negative	Department of Health and Social Care	2020-07-06	2020-07-06	https://id.parliament.uk/CwDUjYa9	https://id.parliament.uk/juPz6AmD	http://www.legislation.gov.uk/uksi/2020/691/made	t
+64	Protection of Freedoms Act 2012 (Destruction, Retention and Use of Biometric Data) (Transitional, Transitory and Saving Provisions) (Amendment) Order 2020	negative	Northern Ireland Office	2020-06-29	2020-07-07	https://id.parliament.uk/g3g3YYDc	https://id.parliament.uk/bDQdiqkW	http://www.legislation.gov.uk/uksi/2020/688/made	t
+65	School Teachers’ Incentive Payments (England) (Amendment) Order 2020	negative	Department for Education	2020-07-04	2020-07-07	https://id.parliament.uk/KP3TvTXU	https://id.parliament.uk/56lZtFrl	http://www.legislation.gov.uk/uksi/2020/690/made	t
+66	Charitable Incorporated Organisations (Insolvency and Dissolution) (Amendment) Regulations 2020	affirmative	Department for Digital, Culture, Media and Sport	2020-07-06	2020-07-08	https://id.parliament.uk/EQ8bZ1eD	https://id.parliament.uk/rSlaTDX7	http://www.legislation.gov.uk/uksi/2020/710/made	t
+67	Early Years Foundation Stage (Exemption from Learning and Development Requirements) and Childcare (Exemption from Registration) (Amendment) Regulations 2020	negative	Department for Education	2020-07-06	2020-07-08	https://id.parliament.uk/FqfceOcO	https://id.parliament.uk/pQ7PJKfx	http://www.legislation.gov.uk/uksi/2020/700/made	t
+68	Value Added Tax (Zero Rate for Personal Protective Equipment) (Extension) (Coronavirus) Order 2020	negative	HM Treasury	2020-07-07	2020-07-08	https://id.parliament.uk/cPeZ2dng	https://id.parliament.uk/MzascO0D	http://www.legislation.gov.uk/uksi/2020/698/made	t
+69	Climate Change Agreements, CRC Energy Efficiency Scheme and Energy Savings Opportunity Scheme (Amendment) (EU Exit) Regulations 2020	negative	Department for Business, Energy and Industrial Strategy	2020-07-08	2020-07-09	https://id.parliament.uk/TLcZaDHp	https://id.parliament.uk/PXUkU3j3	http://www.legislation.gov.uk/uksi/2020/711/made	t
+70	International Tax Enforcement (Disclosable Arrangements) (Coronavirus) (Amendment) Regulations 2020	negative	HM Treasury	2020-07-09	2020-07-09	https://id.parliament.uk/FTigy3PU	https://id.parliament.uk/s2sDjtmg	http://www.legislation.gov.uk/uksi/2020/713/made	t
+71	Merchant Shipping (Safety of Navigation) Regulations 2020	negative	Department for Transport	2020-07-09	2020-07-09	https://id.parliament.uk/XQb9wjkU	https://id.parliament.uk/DpI9QT9G	http://www.legislation.gov.uk/uksi/2020/673/made	t
+72	Companies (Shareholders' Rights to Voting Confirmations) Regulations 2020	negative	Department for Business, Energy and Industrial Strategy	2020-07-06	2020-07-09	https://id.parliament.uk/GSI33Y9j	https://id.parliament.uk/H6FTPeoL	http://www.legislation.gov.uk/uksi/2020/717/made	t
+73	Iraq (Sanctions) (EU Exit) Regulations 2020	negative	Foreign and Commonwealth Office	2020-07-07	2020-07-09	https://id.parliament.uk/4d7QAbZ7	https://id.parliament.uk/wdUPzzgV	http://www.legislation.gov.uk/uksi/2020/707/made	t
+74	Mali (Sanctions) (EU Exit) Regulations 2020	negative	Foreign and Commonwealth Office	2020-07-07	2020-07-09	https://id.parliament.uk/5BXRGd0Z	https://id.parliament.uk/nuqQCQfC	http://www.legislation.gov.uk/uksi/2020/705/made	t
+75	Health Protection (Coronavirus, Restrictions) (No. 2) (England) (Amendment) Regulations 2020	affirmative	Department of Health and Social Care	2020-07-09	2020-07-10	https://id.parliament.uk/t1CRaRm5	https://id.parliament.uk/9AqgJ6pn	http://www.legislation.gov.uk/uksi/2020/719/made	t
+76	Health Protection (Coronavirus, International Travel) (England) (Amendment) (No. 2) Regulations 2020	negative	Department of Health and Social Care	2020-07-10	2020-07-10	https://id.parliament.uk/uST83s8Q	https://id.parliament.uk/dxqQJRk3	http://www.legislation.gov.uk/uksi/2020/724/made	t
+77	Childcare (Early Years Provision Free of Charge) (Extended Entitlement) (Coronavirus) (Amendment) Regulations 2020	negative	Department for Education	2020-07-08	2020-07-10	https://id.parliament.uk/kbtLRZwC	https://id.parliament.uk/JhuB9U4X	http://www.legislation.gov.uk/uksi/2020/712/made	t
+78	Court Fees (Miscellaneous Amendments) Order 2020	negative	Ministry of Justice	2020-07-08	2020-07-13	https://id.parliament.uk/Svfp6Vkp	https://id.parliament.uk/td0AhBgp	http://www.legislation.gov.uk/uksi/2020/720/made	t
+79	M23 Motorway (Gatwick Spur) (50 Miles Per Hour Speed Limit) Regulations 2020	negative	Department for Transport	2020-07-06	2020-07-13	https://id.parliament.uk/us5hBh6Z	https://id.parliament.uk/MghHHWrD	http://www.legislation.gov.uk/uksi/2020/721/made	t
+80	Immigration and Nationality (Fees) (Amendment) (No. 3) Regulations 2020	negative	Home Office	2020-07-14	2020-07-14	https://id.parliament.uk/X9NHzd8h	https://id.parliament.uk/NggA2rMT	http://www.legislation.gov.uk/uksi/2020/736/made	t
+81	Trade Remedies (Amendment) (EU Exit) (No. 2) Regulations 2020	negative	Department for International Trade	2020-07-13	2020-07-14	https://id.parliament.uk/3lQcIeoP	https://id.parliament.uk/8fJsag5q	http://www.legislation.gov.uk/uksi/2020/730/made	t
+82	Value Added Tax (Reduced Rate) (Hospitality and Tourism) (Coronavirus) Order 2020	negative	HM Revenue and Customs	2020-07-13	2020-07-14	https://id.parliament.uk/ZunWiIOt	https://id.parliament.uk/e4PnU178	http://www.legislation.gov.uk/uksi/2020/728/made	t
+\.
+
+
+--
+-- Name: instruments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: robert
+--
+
+SELECT pg_catalog.setval('public.instruments_id_seq', 90, true);
+
+
+--
+-- Name: instruments instruments_pkey; Type: CONSTRAINT; Schema: public; Owner: robert
+--
+
+ALTER TABLE ONLY public.instruments
+    ADD CONSTRAINT instruments_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
