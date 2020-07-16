@@ -57,7 +57,8 @@ task :import_from_sparql => :environment do
       instrument.date_laid = instrument_json["LaidDate"]["value"].strip
       instrument.instrument_uri = instrument_json["SI"]["value"].strip
       instrument.work_package_uri = instrument_json["workPackage"]["value"].strip
-      instrument.tna_uri = instrument_json["Link"]["value"].strip
+      # national archive uri (legilsation.gov) is not always available because they don't always publish an SI when its laid straight away. We think this is something to do with the departmental sign off
+      instrument.tna_uri = instrument_json["Link"]["value"].strip if instrument_json["Link"]
       instrument.save
     end
   end
