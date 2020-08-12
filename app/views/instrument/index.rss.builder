@@ -5,7 +5,7 @@ xml.rss( :version => '2.0') do
     xml.link( 'https://made-n-laid.herokuapp.com/' )
     xml.copyright( 'https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/' )
     xml.language( 'en-uk' )
-    xml.managingEditor( 'somervillea@parliament.uk' )
+    xml.managingEditor( 'somervillea@parliament.uk (Anya Somerville)' )
     xml.pubDate( @instruments.first.date_laid.rfc822 )
     xml << render(:partial => 'instrument', :collection => @instruments )
   end
