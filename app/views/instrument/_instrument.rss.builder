@@ -1,4 +1,5 @@
 xml.item do
+  xml.guid( instrument.url )
   xml.title( instrument.title )
   xml.description( instrument.description )
   xml.link( instrument.url )
