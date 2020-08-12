@@ -1,5 +1,18 @@
 class Instrument < ActiveRecord::Base
   
+  def description
+    description = ''
+    description = description + self.title
+    description = description + '. Made on '
+    description = description + self.date_made.strftime( '%d-%m-%Y')
+    description = description + ', laid on '
+    description = description + self.date_laid.strftime( '%d-%m-%Y')
+    description = description + '. Subject to the '
+    description = description + self.procedure
+    description = description + ' procedure.'
+    description
+  end
+  
   def tweet_text
     tweet_text = ''
     tweet_text = tweet_text + self.short_title
