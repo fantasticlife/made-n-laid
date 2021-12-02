@@ -37,10 +37,14 @@ class Instrument < ActiveRecord::Base
   end
   
   def url
-    'https://statutoryinstruments.parliament.uk/timeline/' + self.instrument_id + '/madenlaid/'
+    'https://statutoryinstruments.parliament.uk/instrument/' + self.instrument_id + '/timeline/' + self.work_package_id + '/'
   end
   
   def instrument_id
     self.instrument_uri.split( '/' ).last
+  end
+  
+  def work_package_id
+    self.work_package_uri.split( '/' ).last
   end
 end
